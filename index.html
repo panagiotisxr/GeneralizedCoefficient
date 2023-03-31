@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+        <title> Generalized Coefficient of Earth Pressure </title>
+
+        <link rel="icon" href="favicon.ico">
+
+        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css"/>
+
+        <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    </head>
+    <body>
+        <div class="cut">
+            <img src="cut.jpg">
+        </div>   
+        <h1> The Generalized Coefficients of Earth Pressure</h1>
+        <h2 id="myHeader2"> Online Calculator </h2>
+        <P> By Drs<strong>  Lysandros Pantelidis </strong> and <strong>Panagiotis Christodoulou </strong>  </P>
+        <p><strong><a target="_blank" rel="noopener" href="https://www.mdpi.com/588556"> Download PDF Journal here </a> </strong></p>
+        <p>Cite as: Pantelidis, L. (2019). The generalized coefficients of earth pressure: a unified approach. Applied Sciences, 9(24), 5291. </p>
+        <table cellspacing="10">
+            <h2> Data </h2>
+            <tbody>
+                <tr>
+                    <td> Back fill angle [β]   </td>
+                    <td><input type="number" id="β" name="β" min="0" placeholder="e.g. 20"/>  </td>              
+                </tr>
+
+                <tr>
+                    <td> Effective Total stress [σv']   </td>
+                    <td>  <input type="number" id="σv_prime" name="total_stress" min="0" placeholder="e.g. 40" />  </td>              
+                </tr>
+
+                <tr>
+                    <td> Height [H]    </td>
+                    <td> <input type="number" id="H" name="Height" min="0" placeholder="e.g. 4"/>  </td>              
+                </tr>  
+
+                <tr>
+                    <td> Effective Cohesion [c']   </td>
+                    <td> <input type="number" id="c" name="Cohesion"  min="0" placeholder="e.g. 20 " /> </td>              
+                </tr>  
+
+                <tr>
+                    <td> Effective Friction angle [φ']  </td>
+                    <td>  <input type="number" id="φ_d" name="Friction_angle"  min="0" placeholder="e.g. 30"/> </td>              
+                </tr>  
+
+                <tr>
+                    <td> Unit Weight [γ]  </td>
+                    <td>  <input type="number" id="γ" name="Unit_Weight" min="0"  placeholder="e.g. 20"/>  </td>              
+                </tr>   
+
+                <tr>
+                    <td> Horizontal acceleration [ah]  </td>
+                    <td>  <input type="number" id="ah" name="Horizontal accel"  placeholder="e.g. 0.3"/>  </td>              
+                </tr>            
+
+                <tr>
+                    <td> Vertical acceleration [av]  </td>
+                    <td>  
+                        <input  
+                        type="number";
+                        id="av";
+                        name="vertical_acceleration";
+                        placeholder="e.g. 0.15";
+                        />  
+                    </td>              
+                </tr>                      
+           
+                <tr>
+                    <td> Secant modulus of elasticity [Es] </td>
+                    <td>  <input type="number" id="Es" name="Modulus_of_elasticity"  min="0" placeholder="e.g. 20000"/>  </td>              
+                </tr>      
+           
+                <tr>
+                    <td> Poisson’s ratio [ν] </td>
+                    <td>   <input type="number" id="ν" name="Poissons_ratio"  min="0" maxlength="0.5" placeholder="e.g. 0.3"/>  </td>              
+                </tr>    
+           
+                <tr>
+                    <td> Depth where the earth pressure is calculated [Z] </td>
+                    <td>   <input type="number" id="Z" name="Depth"  min="0"  placeholder="e.g. 2 (Z<H)"/>  </td>              
+                </tr>  
+
+                <tr>
+                    <td> Intermediate points </td>
+                    <td>   <input type="number" id="Inte_p" name="Intermediate_points"  min="0" placeholder="e.g. 15" />   </td>              
+                </tr>   
+
+                <tr>
+                    <td> Presellected Values </td>
+                    <td>   <button type="button" onclick="stored_values()">Stored Values</button>   </td>              
+                </tr> 
+ 
+                <tr>
+                    <td> Execution </td>
+                    <td>   <button id="submit-button" type="submit" py-Click="my_function()"> Analysis </button>   </td>              
+                </tr>                
+                
+            </tbody>
+        </table>
+        
+        <script>
+        function stored_values() {
+          document.getElementById("β").defaultValue = "20";
+          document.getElementById("σv_prime").defaultValue = "40";
+          document.getElementById("H").defaultValue = "4";         
+          document.getElementById("c").defaultValue = "20";         
+          document.getElementById("φ_d").defaultValue = "30";
+          document.getElementById("γ").defaultValue = "20";
+          document.getElementById("ah").defaultValue = "0.3";
+          document.getElementById("av").defaultValue = "0.15";
+          document.getElementById("Es").defaultValue = "20000";
+          document.getElementById("ν").defaultValue = "0.3";          
+          document.getElementById("Z").defaultValue = "2";
+          document.getElementById("Inte_p").defaultValue = "15";
+         
+        }
+        </script>
+        
+  
+<py-script> 
+    
+def my_function(*args, **kwargs):
+    β = float (Element('β').element.value)
+    σv_prime = float (Element('σv_prime').element.value )
+    H= float (Element('H').element.value )
+    c = float (Element('c').element.value )
+    φ_d = float (Element('φ_d').element.value )
+    γ = float (Element('γ').element.value )         
+    ah = float (Element('ah').element.value )  
+    av = float (Element('av').element.value )
+    Es = float (Element('Es').element.value )  
+    ν = float (Element('ν').element.value )                          
+    Z = float (Element('Z').element.value ) 
+    Inte_p = int (Element('Inte_p').element.value ) 
+
+    if (Z&gtH):
+        Z=H
+        print ("Error Z couldn't be greater than H")
+    from math import sin, cos, tan, pi, radians, sqrt, asin ,atan
+    def data():
+        print ("DATA:")
+        print ("---------")
+        print ("σ_v'[kPa]", "c' [kPa]", " φ' [°]' "," γ [kN/m3]", " H [m]", "  z [m] ", " α_h ", " α_v  ", " ν   "," E [kPa]")
+        print (σv_prime, "    ", c,"    ", φ_d,"    ", γ,"     ", H,"   ", Z,"   ", ah," ", av," ",ν   ," ",Es  )
+        print ()
+    ah_av = ah/(1-av)
+    φ_r = radians(φ_d)
+    β_r = radians(β)
+    Rankine_A = (1-sin(φ_r))/(1+sin(φ_r))
+    Rankine_P = 1/Rankine_A
+    Jaky = 1-sin(φ_r)
+    ζ = complex(-0.5,(sqrt(3))/2)
+    #----------------------------------------------------------------------------------
+    def at_rest(x,y):
+        z_a = Z 
+        mA = x
+        ξA = (mA-1)/(mA+1)-1 
+        A0_A = (Rankine_A*(1-ξA*sin(φ_r)+ah_av*tan(φ_r)*(2+ξA*Jaky)))
+        if A0_A&lt1:
+            λ=1
+        else:
+            λ=0
+        two_λ_1 = (2*λ-1)
+        B1_A = ((two_λ_1*2*c/((1-av)*(σv_prime)))*tan(pi/4-φ_r/2))
+        e1 = ((1-A0_A)/B1_A) 
+        e2 = (1+A0_A)/(two_λ_1*B1_A)+2*c/((1-av)*σv_prime*two_λ_1*B1_A*tan(φ_r))
+        α0 = (1+(e2**2)*(tan(φ_r))**2)
+        b0 = (1-(2*two_λ_1*e1*e2+e2**2)*(tan(φ_r))**2)
+        c0 = (e1**2+2*two_λ_1*e1*e2)*(tan(φ_r))**2
+        d0 = (-e1**2*(tan(φ_r))**2)
+        D0 = (b0**2-3*α0*c0)
+        D1 = (2*b0**3-9*α0*b0*c0+27*α0**2*d0)
+        IMSQRT = ((((D1**2)-(4*(D0**3))))**0.5)
+        D1_sqrt = ((D1-IMSQRT)/2)
+        C0 = (D1_sqrt**(1/3))
+        ζ = complex(-0.5,(sqrt(3))/2)
+        ζ_λ_C0 = ((ζ**λ)*C0)
+        twoλ_1_3α0 = (-1/(3*two_λ_1*α0))
+        D0_ζλC0 = (D0/ζ_λ_C0)
+        bo_ζλC0 = (b0+ζ_λ_C0 + D0_ζλC0)
+        colV_colX = (bo_ζλC0.real * twoλ_1_3α0.real)
+        φm = (asin(colV_colX))
+        φm_deg_o = (φm* (180 / pi))
+        cm_o = (c*tan(φm)/tan(φ_r))
+        Κ_ΧΕ = ((1-two_λ_1*sin(φm))/(1+two_λ_1*sin(φm))- two_λ_1*2*cm_o*tan(pi/4-two_λ_1*φm/2)/(σv_prime*(1-av)))
+        σ_ΧΕ = (Κ_ΧΕ*(1-av)*σv_prime)
+        At_rest=  Κ_ΧΕ
+        if y == 0:
+            print ("Κ_ΟΕ"," ", "c_m [kPa]", "φ_m [°]" )
+            print (round (Κ_ΧΕ,3),"", round(cm_o,3) ,"   ", round (φm_deg_o,3) )
+            print ()
+        return (At_rest,cm_o,φm_deg_o)
+    #----------------------------------------------------------------------------------
+
+    def active(x,y):
+        z_a = Z    
+        mA = x   
+        ξA = (mA-1)/(mA+1)-1 
+        A0_A = (Rankine_A*(1-ξA*sin(φ_r)+ah_av*tan(φ_r)*(2+ξA*Jaky)))
+        if A0_A&lt1:
+            λ=1
+        else:
+            λ=0
+        two_λ_1 = (2*λ-1)
+        B1_A = ((two_λ_1*2*c/((1-av)*(σv_prime)))*tan(pi/4-φ_r/2))
+        e1 = ((1-A0_A)/B1_A) 
+        e2 = (1+A0_A)/(two_λ_1*B1_A)+2*c/((1-av)*σv_prime*two_λ_1*B1_A*tan(φ_r))
+        α0 = (1+(e2**2)*(tan(φ_r))**2)
+        b0 = (1-(2*two_λ_1*e1*e2+e2**2)*(tan(φ_r))**2)
+        c0 = (e1**2+2*two_λ_1*e1*e2)*(tan(φ_r))**2
+        d0 = (-e1**2*(tan(φ_r))**2)
+        D0 = (b0**2-3*α0*c0)
+        D1 = (2*b0**3-9*α0*b0*c0+27*α0**2*d0)
+        IMSQRT = ((((D1**2)-(4*(D0**3))))**0.5)
+        D1_sqrt = ((D1-IMSQRT)/2)
+        C0 = (D1_sqrt**(1/3))
+        ζ = complex(-0.5,(sqrt(3))/2)
+        ζ_λ_C0 = ((ζ**λ)*C0)
+        twoλ_1_3α0 = (-1/(3*two_λ_1*α0))
+        D0_ζλC0 = (D0/ζ_λ_C0)
+        bo_ζλC0 = (b0+ζ_λ_C0 + D0_ζλC0)
+        colV_colX = (bo_ζλC0.real * twoλ_1_3α0.real)
+        φm = (asin(colV_colX))
+        φm_deg_a = (φm* (180 / pi))
+        cm_a = (c*tan(φm)/tan(φ_r))
+        Κ_ΧΕ = ((1-two_λ_1*sin(φm))/(1+two_λ_1*sin(φm))- two_λ_1*2*cm_a*tan(pi/4-two_λ_1*φm/2)/(σv_prime*(1-av)))
+        σ_ΧΕ = (Κ_ΧΕ*(1-av)*σv_prime)
+        Active= Κ_ΧΕ
+        At_rest,cm_o,φm_deg_o = at_rest(1,1)
+        ΔΚ_a = At_rest - Active
+        ΔxM_a = ((pi/4)*((1-ν**2)/Es)*(1+Z/H)**3*(1-Z/H)*H*ΔΚ_a*(1-av)*σv_prime/(Z/H))
+        if y == 0:
+            print ("Κ_ΑΕ"," ", "c_m [kPa]", " φ_m [°]", " Δx_max Active [mm]" )
+            print (round (Active,3),"", round(cm_a,3) ,"     ", round (φm_deg_a,3), " " ,round (ΔxM_a*1000,4))
+            print ()
+        return (Active,cm_a,φm_deg_a,ΔxM_a)
+    #----------------------------------------------------------------------------------
+    dx_dmax = []
+    for i in range (1,Inte_p+1):
+        dx_dmax.append (i/Inte_p)    
+        res_a = dx_dmax[::-1]
+    if 0 &lt Inte_p &lt 100: 
+        res_a[0] = 0.99
+    elif 100 &lt;= Inte_p: 
+        res_a[0] = 0.999
+    #----------------------------------------------------------------------------------
+    # intermediate active
+    Active,cm_a,φm_deg_a,ΔxM_a= active(99999999999,1)
+    At_rest,cm_o,φm_deg_o=at_rest(1,1)
+    Δx_int_act=[]
+    for i in range (0,Inte_p):
+        Δx_int_act.append(ΔxM_a*(res_a[i])) 
+    mA = []
+    ξA = []
+    A0_A = []
+    B1_A = []
+    e1 = []
+    e2 = []
+    two_λ_1=[]
+    α0 = []    
+    b0 = []
+    c0 = []
+    d0 = []
+    D0 = []
+    D1 = []
+    IMSQRT = []
+    D1_sqrt = []
+    C0 = []
+    ζ_λ_C0 = []
+    twoλ_1_3α0 = []
+    D0_ζλC0 = []
+    bo_ζλC0 = []
+    colV_colX = []
+    φm = []
+    φm_deg_int = []
+    cm_int = []
+    Κ_ΧΕ_int = []
+    σ_ΧΕ = []
+    Δx_ΔxM = []
+    W1 = []   
+    W2 = []
+    Lw = []
+    L1 = []
+    Lb = []
+    Wm = []
+    RA = []
+    MA = []
+    θB = []
+    Wx = []
+    d_x_a=[]
+    sum_d_x_a=[]
+    λ = [] 
+    for i in range(0,Inte_p):
+        if Δx_int_act[i]/ΔxM_a &gt 1:
+            Δx_ΔxM.append(0.99999)    
+        else:
+            Δx_ΔxM.append(Δx_int_act[i]/ΔxM_a)
+        mA.append((1+Δx_ΔxM[i]*(H/Z)**(1+Δx_ΔxM[i]))*(1-Δx_ΔxM[i])**(-1)) 
+        ξA.append((mA[i]-1)/(mA[i]+1)-1)
+        A0_A.append(Rankine_A*(1-ξA[i]*sin(φ_r)+ah_av*tan(φ_r)*(2+ξA[i]*Jaky)))
+        if A0_A[i]&lt1:
+            λ.append(1)
+        else:
+            λ.append(0)
+        two_λ_1.append(2*λ[i]-1)  
+        B1_A.append((2*c/((1-av)*(σv_prime)))*tan(pi/4-φ_r/2))
+        e1.append((1-A0_A[i])/B1_A[i])
+        e2.append((1+A0_A[i])/(two_λ_1[i]*B1_A[i])+2*c/((1-av)*σv_prime*two_λ_1[i]*B1_A[i]*tan(φ_r)))
+        α0.append((1+(e2[i]**2)*(tan(φ_r))**2))
+        b0.append(1-(2*two_λ_1[i]*e1[i]*e2[i]+e2[i]**2)*(tan(φ_r))**2)
+        c0.append((e1[i]**2+2*two_λ_1[i]*e1[i]*e2[i])*(tan(φ_r))**2)
+        d0.append((-e1[i]**2*(tan(φ_r))**2))
+        D0.append(b0[i]**2-3*α0[i]*c0[i])
+        D1.append(2*b0[i]**3-9*α0[i]*b0[i]*c0[i]+27*α0[i]**2*d0[i])
+        IMSQRT.append((((D1[i]**2)-(4*(D0[i]**3))))**0.5)
+        D1_sqrt.append((D1[i]-IMSQRT[i])/2)
+        C0.append (D1_sqrt[i]**(1/3))   
+        ζ_λ_C0.append((ζ**λ[i])*C0[i])
+        twoλ_1_3α0.append(-1/(3*two_λ_1[i]*α0[i]))
+        D0_ζλC0.append(D0[i]/ζ_λ_C0[i])
+        bo_ζλC0.append(b0[i]+ζ_λ_C0[i] + D0_ζλC0[i])
+        colV_colX.append(bo_ζλC0[i].real * twoλ_1_3α0[i].real)
+        φm.append(asin(colV_colX[i]))
+        φm_deg_int.append(φm[i]* (180 / pi))
+        cm_int.append(c*tan(φm[i])/tan(φ_r))
+        Κ_ΧΕ_int.append((1-two_λ_1[i]*sin(φm[i]))/(1+two_λ_1[i]*sin(φm[i]))- two_λ_1[i]*2*cm_int[i]*tan(pi/4-two_λ_1[i]*φm[i]/2)/(σv_prime*(1-av)))
+    #----------------------------------------------------------------------------------
+    def passive(x,y):
+        At_rest,cm_o,φm_deg_o=at_rest(1,1)
+        z_a = Z    
+        mA = x  
+        ξA = (mA-1)/(mA+1)-1 
+        A0_A= ((Rankine_P**(1+ξA))*(1+ξA*sin(φ_r)+(2/mA-1)*ah_av*tan(φ_r)*(2+ξA*(1+sin(φ_r)))))
+        if A0_A&lt1:
+            λ=1
+        else:
+            λ=0
+        two_λ_1 = (2*λ-1)
+        B1_A =(two_λ_1*2*c/((1-av)*(σv_prime)))*tan(pi/4-φ_r/2)*(tan(pi/4+φ_r/2)/tan(pi/4-φ_r/2))**(1+ξA)   
+        e1 = ((1-A0_A)/B1_A) 
+        e2 = (1+A0_A)/(two_λ_1*B1_A)+2*c/((1-av)*σv_prime*two_λ_1*B1_A*tan(φ_r))    
+        α0 = (1+(e2**2)*(tan(φ_r))**2)
+        b0 = (1-(2*two_λ_1*e1*e2+e2**2)*(tan(φ_r))**2)
+        c0 = (e1**2+2*two_λ_1*e1*e2)*(tan(φ_r))**2
+        d0 = (-e1**2*(tan(φ_r))**2)
+        D0 = (b0**2-3*α0*c0)
+        D1 = (2*b0**3-9*α0*b0*c0+27*α0**2*d0)
+        IMSQRT = ((((D1**2)-(4*(D0**3))))**0.5)
+        D1_sqrt = ((D1-IMSQRT)/2)
+        C0 = (D1_sqrt**(1/3))
+        ζ = complex(-0.5,(sqrt(3))/2)
+        ζ_λ_C0 = ((ζ**λ)*C0)
+        twoλ_1_3α0 = (-1/(3*two_λ_1*α0))
+        D0_ζλC0 = (D0/ζ_λ_C0)
+        bo_ζλC0 = (b0+ζ_λ_C0 + D0_ζλC0)
+        colV_colX = (bo_ζλC0.real * twoλ_1_3α0.real)
+        φm = (asin(colV_colX))
+        φm_deg_p_s = (φm* (180 / pi))
+        cm_p_s = (c*tan(φm)/tan(φ_r))
+        Κ_ΧΕ = ((1-two_λ_1*sin(φm))/(1+two_λ_1*sin(φm))- two_λ_1*2*cm_p_s*tan(pi/4-two_λ_1*φm/2)/(σv_prime*(1-av)))
+        σ_ΧΕ = (Κ_ΧΕ*(1-av)*σv_prime)
+        Passive= Κ_ΧΕ 
+        ΔΚ_p =  Passive - At_rest
+        ΔxM_p = ((pi/4)*((1-ν**2)/Es)*(1+Z/H)**3*(1-Z/H)*H*ΔΚ_p*(1-av)*σv_prime/(Z/H))
+        if y == 0:
+            print ("Κ_ΡΕ"," ", "c_m [kPa]", " φ_m [°]", " Δx_max Passive [mm]" )
+            print (round (Passive,3),"", round(cm_p_s,3) ,"   ", round (φm_deg_p_s,3), "  " ,round (ΔxM_p*1000,4))
+            print ()
+        return (Passive,cm_p_s,φm_deg_p_s,ΔxM_p)
+    #----------------------------------------------------------------------------------
+    # intermediate passive
+    Passive,cm_p_s,φm_deg_p_s,ΔxM_p = passive(99999999999,1)
+    dx_dmax = []
+    for i in range (1,Inte_p+1):
+        dx_dmax.append (i/Inte_p)    
+    res_p = dx_dmax[::1]
+    if 0 &lt Inte_p &lt 100: 
+        res_p[Inte_p-1] = 0.99
+    elif 100 &lt;= Inte_p: 
+        res_p[Inte_p-1] = 0.999 
+    Δx_int_pass=[]
+    for i in range (0,Inte_p):
+        Δx_int_pass.append(ΔxM_p*(res_p[i]))
+    # print (Δx_int_pass)
+    Δx_ΔxM_p = []
+    mA_p = []
+    ξA_p = []
+    A0_A_p= []
+    B1_A_p = []
+    C1_p = []
+    e1_p = []
+    e2_p = []
+    two_λ_p = []
+    α0_p = []    
+    b0_p = []
+    c0_p = []
+    d0_p = []
+    D0_p = []
+    D1_p = []
+    IMSQRT_p = []
+    D1_sqrt_p = []
+    C0_p = []
+    ζ_λ_C0_p = []
+    twoλ_1_3α0_p = []
+    D0_ζλC0_p = []
+    bo_ζλC0_p = []
+    colV_colX_p = []
+    φm_p = []
+    φm_deg_p_int = []
+    cm_p_int = []
+    Κ_ΧΕ_p_int =[]
+    d_x_p=[]
+    sum_d_x_p=[]  
+    λ_p = []
+    for i in range(0,Inte_p):
+        if Δx_int_pass[i]/ΔxM_p &gt 1:
+            Δx_ΔxM_p.append(0.99999)    
+        else:
+            Δx_ΔxM_p.append(Δx_int_pass[i]/ΔxM_p)
+        mA_p.append((1+Δx_ΔxM_p[i]*(H/Z)**(1+Δx_ΔxM_p[i]))*(1-Δx_ΔxM_p[i])**(-1)) 
+        ξA_p.append((mA_p[i]-1)/(mA_p[i]+1)-1)
+        A0_A_p.append((Rankine_P**(1+ξA_p[i]))*(1+ξA_p[i]*sin(φ_r)+(2/mA_p[i]-1)*ah_av*tan(φ_r)*(2+ξA_p[i]*(1+sin(φ_r)))))
+        if A0_A_p[i]&lt1:
+            λ_p.append(1)
+        else:
+            λ_p.append(0)    
+        two_λ_p.append(2*λ_p[i]-1)
+        B1_A_p.append((two_λ_p[i]*2*c/((1-av)*(σv_prime)))*tan(pi/4-φ_r/2)*(tan(pi/4+φ_r/2)/tan(pi/4-φ_r/2))**(1+ξA_p[i]))          
+        e1_p.append((1-A0_A_p[i])/B1_A_p[i])
+        e2_p.append((1+A0_A_p[i])/(two_λ_p[i]*B1_A_p[i])+2*c/((1-av)*σv_prime*two_λ_p[i]*B1_A_p[i]*tan(φ_r)))
+        α0_p.append((1+(e2_p[i]**2)*(tan(φ_r))**2))          
+        b0_p.append(1-(2*two_λ_p[i]*e1_p[i]*e2_p[i]+e2_p[i]**2)*(tan(φ_r))**2)            
+        twoλ_1_3α0_p.append(-1/(3*two_λ_p[i]*α0_p[i])) 
+        c0_p.append((e1_p[i]**2+2*two_λ_p[i]*e1_p[i]*e2_p[i])*(tan(φ_r))**2)
+        d0_p.append(-e1_p[i]**2*(tan(φ_r))**2)
+        D0_p.append(b0_p[i]**2-3*α0_p[i]*c0_p[i])
+        D1_p.append(2*b0_p[i]**3-9*α0_p[i]*b0_p[i]*c0_p[i]+27*α0_p[i]**2*d0_p[i])
+        IMSQRT_p.append((((D1_p[i]**2)-(4*(D0_p[i]**3))))**0.5)
+        D1_sqrt_p.append((D1_p[i]-IMSQRT_p[i])/2)
+        C0_p.append (D1_sqrt_p[i]**(1/3))
+        ζ_λ_C0_p.append((ζ**λ_p[i])*C0_p[i])
+        D0_ζλC0_p.append(D0_p[i]/ζ_λ_C0_p[i])
+        bo_ζλC0_p.append(b0_p[i]+ζ_λ_C0_p[i] + D0_ζλC0_p[i])
+        colV_colX_p.append(bo_ζλC0_p[i].real * twoλ_1_3α0_p[i].real)
+        φm_p.append(asin(colV_colX_p[i]))
+        φm_deg_p_int.append(φm_p[i]* (180 / pi))
+        cm_p_int.append(c*tan(φm_p[i])/tan(φ_r))
+        Κ_ΧΕ_p_int.append((1-two_λ_p[i]*sin(φm_p[i]))/(1+two_λ_p[i]*sin(φm_p[i]))- two_λ_p[i]*2*cm_p_int[i]*tan(pi/4-two_λ_p[i]*φm_p[i]/2)/(σv_prime*(1-av)))
+    # print (Κ_ΧΕ_p_int)
+    #----------------------------------------------------------------------------------
+    data()
+    print ("RESULTS:")
+    print ("---------")
+    Active,cm_a,φm_deg_a,ΔxM_a= active(99999999999,0)
+    At_rest,cm_o,φm_deg_o = at_rest(1,0)
+    Passive,cm_p_s,φm_deg_p_s,ΔxM_p = passive(99999999999,0)
+    print ("INTERMEDIATE ACTIVE STATE:")
+    print ("---------------------------")
+    print ("Δx/Δx_max","  ", "φ_m [°]", " c_m [kPa]","", "K_IA", "    Δx[mm]")
+    for i in range(0,Inte_p):
+        print ("%.3f" % round(res_a[i],3), "      ", "%.2f" % round (φm_deg_int[i],3),"  ", "%.2f" % round (cm_int[i], 3),"     ","%.3f" %  round (Κ_ΧΕ_int[i],3),"  ","%.3f" %  round (Δx_int_act[i]*1000,3))
+    # print ("--------------------------------------------------")
+    print ()
+    print ("INTERMEDIATE PASSIVE STATE:")
+    print ("---------------------------")
+    print ("Δx/Δx_max","  ", "φ_m [°]", "c_m [kPa]","", "K_IP", "    Δx[mm]")
+    for i in range(0,Inte_p):
+        print ("%.3f" % round(res_p[i],3), "      ","%.2f" % round (φm_deg_p_int[i],3),"  ","%.2f" % round (cm_p_int[i], 3),"     ","%.3f" %  round (Κ_ΧΕ_p_int[i],3),"  ","%.3f" %  round (Δx_int_pass[i]*1000,3))
+    # print ("--------------------------------------------------")
+    print ()
+    #----------------------------------------------------------------------------------   
+    
+</py-script>
+       
+        </body>
+</html>
