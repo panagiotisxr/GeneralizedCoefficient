@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -25,34 +26,34 @@
         <table cellspacing="10">
             <h2> Data </h2>
             <tbody>
-                <tr>
+                <!-- <tr>
                     <td> Back fill angle [β]   </td>
                     <td><input type="number" id="β" name="β" min="0" placeholder="e.g. 20"/>  </td>              
-                </tr>
-
-                <tr>
-                    <td> Effective Total stress [σv']   </td>
-                    <td>  <input type="number" id="σv_prime" name="total_stress" min="0" placeholder="e.g. 40" />  </td>              
-                </tr>
-
+                </tr> -->
                 <tr>
                     <td> Height [H]    </td>
-                    <td> <input type="number" id="H" name="Height" min="0" placeholder="e.g. 4"/>  </td>              
+                    <td> <input type="number" id="H" name="Height" min="0" placeholder="e.g. 4 m"/>  </td>              
                 </tr>  
 
                 <tr>
+                    <td> Effective Total stress [σv']   </td>
+                    <td>  <input type="number" id="σv_prime" name="total_stress" min="0" placeholder="e.g. 40 kPa" />  </td>              
+                </tr>
+
+
+                <tr>
                     <td> Effective Cohesion [c']   </td>
-                    <td> <input type="number" id="c" name="Cohesion"  min="0" placeholder="e.g. 20 " /> </td>              
+                    <td> <input type="number" id="c" name="Cohesion"  min="0" placeholder="e.g. 20 kPa" /> </td>              
                 </tr>  
 
                 <tr>
                     <td> Effective Friction angle [φ']  </td>
-                    <td>  <input type="number" id="φ_d" name="Friction_angle"  min="0" placeholder="e.g. 30"/> </td>              
+                    <td>  <input type="number" id="φ_d" name="Friction_angle"  min="0" placeholder="e.g. 30 °"/> </td>              
                 </tr>  
 
                 <tr>
                     <td> Unit Weight [γ]  </td>
-                    <td>  <input type="number" id="γ" name="Unit_Weight" min="0"  placeholder="e.g. 20"/>  </td>              
+                    <td>  <input type="number" id="γ" name="Unit_Weight" min="0"  placeholder="e.g. 20 kN/m3"/>  </td>              
                 </tr>   
 
                 <tr>
@@ -74,7 +75,7 @@
            
                 <tr>
                     <td> Secant modulus of elasticity [Es] </td>
-                    <td>  <input type="number" id="Es" name="Modulus_of_elasticity"  min="0" placeholder="e.g. 20000"/>  </td>              
+                    <td>  <input type="number" id="Es" name="Modulus_of_elasticity"  min="0" placeholder="e.g. 20000 kPa"/>  </td>              
                 </tr>      
            
                 <tr>
@@ -84,7 +85,7 @@
            
                 <tr>
                     <td> Depth where the earth pressure is calculated [Z] </td>
-                    <td>   <input type="number" id="Z" name="Depth"  min="0"  placeholder="e.g. 2 (Z<H)"/>  </td>              
+                    <td>   <input type="number" id="Z" name="Depth"  min="0"  placeholder="e.g. 2 m (Z<H)"/>  </td>              
                 </tr>  
 
                 <tr>
@@ -107,7 +108,7 @@
         
         <script>
         function stored_values() {
-          document.getElementById("β").defaultValue = "20";
+        //   document.getElementById("β").defaultValue = "20";
           document.getElementById("σv_prime").defaultValue = "40";
           document.getElementById("H").defaultValue = "4";         
           document.getElementById("c").defaultValue = "20";         
@@ -127,7 +128,8 @@
 <py-script> 
     
 def my_function(*args, **kwargs):
-    β = float (Element('β').element.value)
+    print ("Analysis was performed using Python programming language")
+    #β = float (Element('β').element.value)
     σv_prime = float (Element('σv_prime').element.value )
     H= float (Element('H').element.value )
     c = float (Element('c').element.value )
@@ -152,7 +154,7 @@ def my_function(*args, **kwargs):
         print ()
     ah_av = ah/(1-av)
     φ_r = radians(φ_d)
-    β_r = radians(β)
+    #β_r = radians(β)
     Rankine_A = (1-sin(φ_r))/(1+sin(φ_r))
     Rankine_P = 1/Rankine_A
     Jaky = 1-sin(φ_r)
