@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-        <title> Generalized Coefficient of Earth Pressure </title>
+        <title> Generalized Coefficients of Earth Pressure </title>
 
         <link rel="icon" href="favicon.ico">
 
@@ -20,9 +20,8 @@
         <h1> The Generalized Coefficients of Earth Pressure</h1>
         <h2 id="myHeader2"> Online Calculator </h2>
         <P> By Drs<strong> <a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=u5fbtlcAAAAJ&hl=en "> Lysandros Pantelidis </a>  </strong> and <strong><a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=R8zAApkAAAAJ&hl=en"> Panagiotis Christodoulou </a> </strong>  </P>
-        <p><strong><a target="_blank" rel="noopener" href="https://www.mdpi.com/588556"> Download PDF Journal here </a> </strong></p>
-        <p>Cite as: Pantelidis, L. (2019). The generalized coefficients of earth pressure: a unified approach. Applied Sciences, 9(24), 5291. </p>
-       
+        <p>Cite as:<strong><a target="_blank" rel="noopener" href="applsci-09-05291-v3.pdf">  Pantelidis, L. (2019). The generalized coefficients of earth pressure: a unified approach. Applied Sciences, 9(24), 5291. </a> </strong></p>
+        <p> <strong><a target="_blank" rel="noopener" href="related_publications.html">Related Publications</a> </strong> </p>
         <div class="container"> 
             <div class="data-section">
                 <table cellspacing="10">
@@ -33,38 +32,49 @@
                             <td><input type="number" id="β" name="β" min="0" placeholder="e.g. 20"/>  </td>              
                         </tr> -->
                         <tr>
-                            <td> Height [H]    </td>
-                            <td> <input type="number" id="H" name="Height" min="0" placeholder="e.g. 4 m"/>  </td>              
+                            <td> Total height of the retained soil on the active or the passive side [H]    </td>
+                            <td> <input type="number" id="H" name="Height" min="0" placeholder="e.g. 4 m "/>  </td>   
+                            <td>m</td>           
                         </tr>  
 
                         <tr>
-                            <td> Effective Total stress [σv']   </td>
-                            <td>  <input type="number" id="σv_prime" name="total_stress" min="0" placeholder="e.g. 40 kPa" />  </td>              
+                            <td> Depth where the earth pressure is calculated [z; z < Η]</td>
+                            <td>   <input type="number" id="Z" name="Depth"  min="0"  placeholder="e.g. 2 m"/>  </td>    
+                            <td>m</td>         
+                        </tr> 
+
+                        <tr>
+                            <td> Effective stress at depth z [σ'v; avoid the zero value]   </td>
+                            <td>  <input type="number" id="σv_prime" name="total_stress" min="0" placeholder="e.g. 40 kPa" />  </td>  
+                            <td>kPa</td>             
                         </tr>
 
 
                         <tr>
-                            <td> Effective Cohesion [c']   </td>
-                            <td> <input type="number" id="c" name="Cohesion"  min="0" placeholder="e.g. 20 kPa" /> </td>              
+                            <td> Effective cohesion [c'; avoid the zero value]   </td>
+                            <td> <input type="number" id="c" name="Cohesion"  min="0" placeholder="e.g. 20 kPa" /> </td>      
+                            <td>kPa</td>         
                         </tr>  
 
                         <tr>
-                            <td> Effective Friction angle [φ']  </td>
-                            <td>  <input type="number" id="φ_d" name="Friction_angle"  min="0" placeholder="e.g. 30 °"/> </td>              
+                            <td> Effective friction angle [φ'] </td>
+                            <td>  <input type="number" id="φ_d" name="Friction_angle"  min="0" placeholder="e.g. 30 °"/> </td>  
+                            <td>°</td>             
                         </tr>  
 
                         <tr>
-                            <td> Unit Weight [γ]  </td>
-                            <td>  <input type="number" id="γ" name="Unit_Weight" min="0"  placeholder="e.g. 20 kN/m3"/>  </td>              
+                            <td> Unit weight of soil [γ] </td>
+                            <td>  <input type="number" id="γ" name="Unit_Weight" min="0"  placeholder="e.g. 20 kN/m3"/>  </td>        
+                            <td>kN/m<sup>3</sup></td>        
                         </tr>   
 
                         <tr>
-                            <td> Horizontal acceleration [ah]  </td>
+                            <td> Seismic coefficient of horizontal acceleration [α<sub>h</sub>] </td>
                             <td>  <input type="number" id="ah" name="Horizontal accel"  placeholder="e.g. 0.3"/>  </td>              
                         </tr>            
 
                         <tr>
-                            <td> Vertical acceleration [av]  </td>
+                            <td> Seismic coefficient of vertical  acceleration [α<sub>v</sub>] </td>
                             <td>  
                                 <input  
                                 type="number";
@@ -76,28 +86,26 @@
                         </tr>                      
                 
                         <tr>
-                            <td> Secant modulus of elasticity [Es] </td>
-                            <td>  <input type="number" id="Es" name="Modulus_of_elasticity"  min="0" placeholder="e.g. 20000 kPa"/>  </td>              
+                            <td> Μodulus of elasticity of soil [E] </td>
+                            <td>  <input type="number" id="Es" name="Modulus_of_elasticity"  min="0" placeholder="e.g. 20000 kPa"/>  </td>  
+                            <td>kPa</td>   
                         </tr>      
                 
                         <tr>
-                            <td> Poisson’s ratio [ν] </td>
+                            <td> Poisson’s ratio of soil [ν]</td>
                             <td>   <input type="number" id="ν" name="Poissons_ratio"  min="0" maxlength="0.5" placeholder="e.g. 0.3"/>  </td>              
                         </tr>    
                 
-                        <tr>
-                            <td> Depth where the earth pressure is calculated [Z] </td>
-                            <td>   <input type="number" id="Z" name="Depth"  min="0"  placeholder="e.g. 2 m (Z<H)"/>  </td>              
-                        </tr>  
+
 
                         <tr>
-                            <td> Intermediate points </td>
+                            <td> Number of intermediate points (for the intermediate earth pressures;see black window below)</td>
                             <td>   <input type="number" id="Inte_p" name="Intermediate_points"  min="0" placeholder="e.g. 15" />   </td>              
-                        </tr>   
+                        </tr>    
 
                         <tr>
-                            <td> Preselected Values </td>
-                            <td>   <button type="button" onclick="stored_values()">Stored Values</button>   </td>              
+                            <td> Preselected values </td>
+                            <td>   <button type="button" onclick="stored_values()">Preselected values</button>   </td>              
                         </tr> 
         
                         <tr>
@@ -134,7 +142,7 @@
             <div class="results-section">
                 <table cellspacing="20">
                     <h2> Results </h2>
-                    <h3> Active State </h3>
+                    <h3> Active State (if H refers to the active side of the problem)</h3>
                     <tbody>
                         <tr>
                             <td>Κ<sub>ΑΕ</sub> </td>
@@ -170,7 +178,7 @@
                 </table>
                 <hr>
                 <table cellspacing="20">
-                    <h3> Passive State </h3>
+                    <h3> Passive State (if H refers to the passive side of the problem) </h3>
                     <tbody>
                         <tr>
                             <td>Κ<sub>PE</sub> </td>
@@ -259,7 +267,9 @@ def my_function(*args, **kwargs):
     #----------------------------------------------------------------------------------
 
     def active(x,y):
-        z_a = Z    
+        z_a = Z 
+        if   (z_a  &gt H/2):
+            z_a = H/2
         mA = x   
         ξA = (mA-1)/(mA+1)-1 
         A0_A = (Rankine_A*(1-ξA*sin(φ_r)+ah_av*tan(φ_r)*(2+ξA*Jaky)))
@@ -294,7 +304,7 @@ def my_function(*args, **kwargs):
         Active= Κ_ΧΕ
         At_rest,cm_o,φm_deg_o = at_rest(1,1)
         ΔΚ_a = At_rest - Active
-        ΔxM_a = ((pi/4)*((1-ν**2)/Es)*(1+Z/H)**3*(1-Z/H)*H*ΔΚ_a*(1-av)*σv_prime/(Z/H))
+        ΔxM_a = ((pi/4)*((1-ν**2)/Es)*(1+z_a/H)**3*(1-z_a/H)*H*ΔΚ_a*(1-av)*σv_prime/(z_a/H))
        
         return (Active,cm_a,φm_deg_a,ΔxM_a)
     #----------------------------------------------------------------------------------
@@ -390,7 +400,9 @@ def my_function(*args, **kwargs):
     #----------------------------------------------------------------------------------
     def passive(x,y):
         At_rest,cm_o,φm_deg_o=at_rest(1,1)
-        z_a = Z    
+        z_a = Z 
+        if   (z_a  &gt H/2):
+            z_a = H/2 
         mA = x  
         ξA = (mA-1)/(mA+1)-1 
         A0_A= ((Rankine_P**(1+ξA))*(1+ξA*sin(φ_r)+(2/mA-1)*ah_av*tan(φ_r)*(2+ξA*(1+sin(φ_r)))))
@@ -424,7 +436,7 @@ def my_function(*args, **kwargs):
         σ_ΧΕ = (Κ_ΧΕ*(1-av)*σv_prime)
         Passive= Κ_ΧΕ 
         ΔΚ_p =  Passive - At_rest
-        ΔxM_p = ((pi/4)*((1-ν**2)/Es)*(1+Z/H)**3*(1-Z/H)*H*ΔΚ_p*(1-av)*σv_prime/(Z/H))
+        ΔxM_p = ((pi/4)*((1-ν**2)/Es)*(1+z_a/H)**3*(1-z_a/H)*H*ΔΚ_p*(1-av)*σv_prime/(z_a/H))
      
         return (Passive,cm_p_s,φm_deg_p_s,ΔxM_p)
     #----------------------------------------------------------------------------------
