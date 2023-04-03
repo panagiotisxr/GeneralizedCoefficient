@@ -22,115 +22,178 @@
         <P> By Drs<strong> <a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=u5fbtlcAAAAJ&hl=en "> Lysandros Pantelidis </a>  </strong> and <strong><a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=R8zAApkAAAAJ&hl=en"> Panagiotis Christodoulou </a> </strong>  </P>
         <p><strong><a target="_blank" rel="noopener" href="https://www.mdpi.com/588556"> Download PDF Journal here </a> </strong></p>
         <p>Cite as: Pantelidis, L. (2019). The generalized coefficients of earth pressure: a unified approach. Applied Sciences, 9(24), 5291. </p>
-        <table cellspacing="10">
-            <h2> Data </h2>
-            <tbody>
-                <!-- <tr>
-                    <td> Back fill angle [β]   </td>
-                    <td><input type="number" id="β" name="β" min="0" placeholder="e.g. 20"/>  </td>              
-                </tr> -->
-                <tr>
-                    <td> Height [H]    </td>
-                    <td> <input type="number" id="H" name="Height" min="0" placeholder="e.g. 4 m"/>  </td>              
-                </tr>  
+       
+        <div class="container"> 
+            <div class="data-section">
+                <table cellspacing="10">
+                    <h2> Data </h2>
+                    <tbody>
+                        <!-- <tr>
+                            <td> Back fill angle [β]   </td>
+                            <td><input type="number" id="β" name="β" min="0" placeholder="e.g. 20"/>  </td>              
+                        </tr> -->
+                        <tr>
+                            <td> Height [H]    </td>
+                            <td> <input type="number" id="H" name="Height" min="0" placeholder="e.g. 4 m"/>  </td>              
+                        </tr>  
 
-                <tr>
-                    <td> Effective Total stress [σv']   </td>
-                    <td>  <input type="number" id="σv_prime" name="total_stress" min="0" placeholder="e.g. 40 kPa" />  </td>              
-                </tr>
+                        <tr>
+                            <td> Effective Total stress [σv']   </td>
+                            <td>  <input type="number" id="σv_prime" name="total_stress" min="0" placeholder="e.g. 40 kPa" />  </td>              
+                        </tr>
 
 
-                <tr>
-                    <td> Effective Cohesion [c']   </td>
-                    <td> <input type="number" id="c" name="Cohesion"  min="0" placeholder="e.g. 20 kPa" /> </td>              
-                </tr>  
+                        <tr>
+                            <td> Effective Cohesion [c']   </td>
+                            <td> <input type="number" id="c" name="Cohesion"  min="0" placeholder="e.g. 20 kPa" /> </td>              
+                        </tr>  
 
-                <tr>
-                    <td> Effective Friction angle [φ']  </td>
-                    <td>  <input type="number" id="φ_d" name="Friction_angle"  min="0" placeholder="e.g. 30 °"/> </td>              
-                </tr>  
+                        <tr>
+                            <td> Effective Friction angle [φ']  </td>
+                            <td>  <input type="number" id="φ_d" name="Friction_angle"  min="0" placeholder="e.g. 30 °"/> </td>              
+                        </tr>  
 
-                <tr>
-                    <td> Unit Weight [γ]  </td>
-                    <td>  <input type="number" id="γ" name="Unit_Weight" min="0"  placeholder="e.g. 20 kN/m3"/>  </td>              
-                </tr>   
+                        <tr>
+                            <td> Unit Weight [γ]  </td>
+                            <td>  <input type="number" id="γ" name="Unit_Weight" min="0"  placeholder="e.g. 20 kN/m3"/>  </td>              
+                        </tr>   
 
-                <tr>
-                    <td> Horizontal acceleration [ah]  </td>
-                    <td>  <input type="number" id="ah" name="Horizontal accel"  placeholder="e.g. 0.3"/>  </td>              
-                </tr>            
+                        <tr>
+                            <td> Horizontal acceleration [ah]  </td>
+                            <td>  <input type="number" id="ah" name="Horizontal accel"  placeholder="e.g. 0.3"/>  </td>              
+                        </tr>            
 
-                <tr>
-                    <td> Vertical acceleration [av]  </td>
-                    <td>  
-                        <input  
-                        type="number";
-                        id="av";
-                        name="vertical_acceleration";
-                        placeholder="e.g. 0.15";
-                        />  
-                    </td>              
-                </tr>                      
-           
-                <tr>
-                    <td> Secant modulus of elasticity [Es] </td>
-                    <td>  <input type="number" id="Es" name="Modulus_of_elasticity"  min="0" placeholder="e.g. 20000 kPa"/>  </td>              
-                </tr>      
-           
-                <tr>
-                    <td> Poisson’s ratio [ν] </td>
-                    <td>   <input type="number" id="ν" name="Poissons_ratio"  min="0" maxlength="0.5" placeholder="e.g. 0.3"/>  </td>              
-                </tr>    
-           
-                <tr>
-                    <td> Depth where the earth pressure is calculated [Z] </td>
-                    <td>   <input type="number" id="Z" name="Depth"  min="0"  placeholder="e.g. 2 m (Z<H)"/>  </td>              
-                </tr>  
+                        <tr>
+                            <td> Vertical acceleration [av]  </td>
+                            <td>  
+                                <input  
+                                type="number";
+                                id="av";
+                                name="vertical_acceleration";
+                                placeholder="e.g. 0.15";
+                                />  
+                            </td>              
+                        </tr>                      
+                
+                        <tr>
+                            <td> Secant modulus of elasticity [Es] </td>
+                            <td>  <input type="number" id="Es" name="Modulus_of_elasticity"  min="0" placeholder="e.g. 20000 kPa"/>  </td>              
+                        </tr>      
+                
+                        <tr>
+                            <td> Poisson’s ratio [ν] </td>
+                            <td>   <input type="number" id="ν" name="Poissons_ratio"  min="0" maxlength="0.5" placeholder="e.g. 0.3"/>  </td>              
+                        </tr>    
+                
+                        <tr>
+                            <td> Depth where the earth pressure is calculated [Z] </td>
+                            <td>   <input type="number" id="Z" name="Depth"  min="0"  placeholder="e.g. 2 m (Z<H)"/>  </td>              
+                        </tr>  
 
-                <tr>
-                    <td> Intermediate points </td>
-                    <td>   <input type="number" id="Inte_p" name="Intermediate_points"  min="0" placeholder="e.g. 15" />   </td>              
-                </tr>   
+                        <tr>
+                            <td> Intermediate points </td>
+                            <td>   <input type="number" id="Inte_p" name="Intermediate_points"  min="0" placeholder="e.g. 15" />   </td>              
+                        </tr>   
 
-                <tr>
-                    <td> Preselected Values </td>
-                    <td>   <button type="button" onclick="stored_values()">Stored Values</button>   </td>              
-                </tr> 
- 
-                <tr>
-                    <td> Execution </td>
-                    <td>   <button id="submit-button" type="submit" py-Click="my_function()"> Analysis </button>   </td>              
-                </tr>   
-
-                <tr>
-                    <td> Refresh Page </td>
-                    <td>          <button onClick="history.go(0);">Refresh</button>  </td>              
-                </tr>                   
-            </tbody>
-        </table>
+                        <tr>
+                            <td> Preselected Values </td>
+                            <td>   <button type="button" onclick="stored_values()">Stored Values</button>   </td>              
+                        </tr> 
         
-        <script>
-        function stored_values() {
-        //   document.getElementById("β").defaultValue = "20";
-          document.getElementById("σv_prime").defaultValue = "40";
-          document.getElementById("H").defaultValue = "4";         
-          document.getElementById("c").defaultValue = "20";         
-          document.getElementById("φ_d").defaultValue = "30";
-          document.getElementById("γ").defaultValue = "20";
-          document.getElementById("ah").defaultValue = "0.3";
-          document.getElementById("av").defaultValue = "0.15";
-          document.getElementById("Es").defaultValue = "20000";
-          document.getElementById("ν").defaultValue = "0.3";          
-          document.getElementById("Z").defaultValue = "2";
-          document.getElementById("Inte_p").defaultValue = "15";
-         
-        }
-        </script>
-  
-<py-script> 
+                        <tr>
+                            <td> Execution </td>
+                            <td>   <button id="submit-button" type="submit" py-Click="my_function()"> Analysis </button>   </td>              
+                        </tr>   
+
+                        <tr>
+                            <td> Refresh Page </td>
+                            <td>          <button onClick="history.go(0);">Refresh</button>  </td>              
+                        </tr>                   
+                    </tbody>
+                </table>
+                    <script>
+                    function stored_values() {
+                    //   document.getElementById("β").defaultValue = "20";
+                    document.getElementById("σv_prime").defaultValue = "40";
+                    document.getElementById("H").defaultValue = "4";         
+                    document.getElementById("c").defaultValue = "20";         
+                    document.getElementById("φ_d").defaultValue = "30";
+                    document.getElementById("γ").defaultValue = "20";
+                    document.getElementById("ah").defaultValue = "0.3";
+                    document.getElementById("av").defaultValue = "0.15";
+                    document.getElementById("Es").defaultValue = "20000";
+                    document.getElementById("ν").defaultValue = "0.3";          
+                    document.getElementById("Z").defaultValue = "2";
+                    document.getElementById("Inte_p").defaultValue = "15";
+                    
+                    }
+                    </script>
+
+            </div>
+
+            <div class="results-section">
+                <table cellspacing="20">
+                    <h2> Results </h2>
+                    <h3> Active State </h3>
+                    <tbody>
+                        <tr>
+                            <td>Κ<sub>ΑΕ</sub> </td>
+                            <td>c<sub>m</sub> [kPa] </td>
+                            <td>φ<sub>m</sub> [°] </td>          
+                            <td>Δx<sub>max Active</sub> [mm] </td>       
+                        </tr>
+                        <tr>
+                           <td> <span id='labelΚ_ΑΕ'> </span> </td>
+                           <td> <span id='labelcm_a'> </span> </td>
+                           <td> <span id='labelφm_deg_a'> </span> </td>
+                           <td> <span id='labelΔxM_a'> </span> </td>
+
+                        </tr>  
+                    </tbody>   
+                </table>
+                <hr>
+                <table cellspacing="20">
+                    <h3> At rest </h3>
+                    <tbody>
+                        <tr>
+                            <td>Κ<sub>ΟΕ</sub> </td>
+                            <td>c<sub>m</sub> [kPa] </td>
+                            <td>φ<sub>m</sub> [°] </td>              
+                        </tr>
+                        <tr>
+                            <td> <span id='labelAt_rest'> </span> </td>
+                            <td> <span id='labelcm_o'> </span> </td>
+                            <td> <span id='labelφm_deg_o'> </span> </td>
+
+                        </tr>  
+                    </tbody>   
+                </table>
+                <hr>
+                <table cellspacing="20">
+                    <h3> Passive State </h3>
+                    <tbody>
+                        <tr>
+                            <td>Κ<sub>PE</sub> </td>
+                            <td>c<sub>m</sub> [kPa]</td>
+                            <td>φ<sub>m</sub> [°]</td>          
+                            <td>Δx<sub>max Passive</sub> [mm]</td>   
+                        </tr>
+                        <tr>
+                            <td> <span id='labelPassive'> </span> </td>
+                            <td> <span id='labelcm_p_s'> </span> </td>
+                            <td> <span id='labelφm_deg_p_s'> </span> </td>
+                            <td> <span id='labelΔxM_p'> </span> </td>
+
+                        </tr>  
+                    </tbody>   
+                </table>
+
+            </div>
+        </div>     
+  <py-script> 
     
 def my_function(*args, **kwargs):
-    print ("Analysis was performed using Python programming language")
+    print ("Algorithm developed using the Python3 programming language")
     #β = float (Element('β').element.value)
     σv_prime = float (Element('σv_prime').element.value )
     H= float (Element('H').element.value )
@@ -143,17 +206,12 @@ def my_function(*args, **kwargs):
     ν = float (Element('ν').element.value )                          
     Z = float (Element('Z').element.value ) 
     Inte_p = int (Element('Inte_p').element.value ) 
+    #pyscript.write('labelTag',Inte_p)
 
     if (Z&gtH):
         Z=H
         print ("Error Z couldn't be greater than H")
     from math import sin, cos, tan, pi, radians, sqrt, asin ,atan
-    def data():
-        print ("DATA:")
-        print ("---------")
-        print ("σ_v'[kPa]", "c' [kPa]", " φ' [°]' "," γ [kN/m3]", " H [m]", "  z [m] ", " α_h ", " α_v  ", " ν   "," E [kPa]")
-        print (σv_prime, "    ", c,"    ", φ_d,"    ", γ,"     ", H,"   ", Z,"   ", ah," ", av," ",ν   ," ",Es  )
-        print ()
     ah_av = ah/(1-av)
     φ_r = radians(φ_d)
     #β_r = radians(β)
@@ -196,10 +254,7 @@ def my_function(*args, **kwargs):
         Κ_ΧΕ = ((1-two_λ_1*sin(φm))/(1+two_λ_1*sin(φm))- two_λ_1*2*cm_o*tan(pi/4-two_λ_1*φm/2)/(σv_prime*(1-av)))
         σ_ΧΕ = (Κ_ΧΕ*(1-av)*σv_prime)
         At_rest=  Κ_ΧΕ
-        if y == 0:
-            print ("Κ_ΟΕ"," ", "c_m [kPa]", "φ_m [°]" )
-            print (round (Κ_ΧΕ,3),"", round(cm_o,3) ,"   ", round (φm_deg_o,3) )
-            print ()
+        
         return (At_rest,cm_o,φm_deg_o)
     #----------------------------------------------------------------------------------
 
@@ -240,10 +295,7 @@ def my_function(*args, **kwargs):
         At_rest,cm_o,φm_deg_o = at_rest(1,1)
         ΔΚ_a = At_rest - Active
         ΔxM_a = ((pi/4)*((1-ν**2)/Es)*(1+Z/H)**3*(1-Z/H)*H*ΔΚ_a*(1-av)*σv_prime/(Z/H))
-        if y == 0:
-            print ("Κ_ΑΕ"," ", "c_m [kPa]", " φ_m [°]", " Δx_max Active [mm]" )
-            print (round (Active,3),"", round(cm_a,3) ,"     ", round (φm_deg_a,3), " " ,round (ΔxM_a*1000,4))
-            print ()
+       
         return (Active,cm_a,φm_deg_a,ΔxM_a)
     #----------------------------------------------------------------------------------
     dx_dmax = []
@@ -373,10 +425,7 @@ def my_function(*args, **kwargs):
         Passive= Κ_ΧΕ 
         ΔΚ_p =  Passive - At_rest
         ΔxM_p = ((pi/4)*((1-ν**2)/Es)*(1+Z/H)**3*(1-Z/H)*H*ΔΚ_p*(1-av)*σv_prime/(Z/H))
-        if y == 0:
-            print ("Κ_ΡΕ"," ", "c_m [kPa]", " φ_m [°]", " Δx_max Passive [mm]" )
-            print (round (Passive,3),"", round(cm_p_s,3) ,"   ", round (φm_deg_p_s,3), "  " ,round (ΔxM_p*1000,4))
-            print ()
+     
         return (Passive,cm_p_s,φm_deg_p_s,ΔxM_p)
     #----------------------------------------------------------------------------------
     # intermediate passive
@@ -459,12 +508,28 @@ def my_function(*args, **kwargs):
         Κ_ΧΕ_p_int.append((1-two_λ_p[i]*sin(φm_p[i]))/(1+two_λ_p[i]*sin(φm_p[i]))- two_λ_p[i]*2*cm_p_int[i]*tan(pi/4-two_λ_p[i]*φm_p[i]/2)/(σv_prime*(1-av)))
     # print (Κ_ΧΕ_p_int)
     #----------------------------------------------------------------------------------
-    data()
-    print ("RESULTS:")
-    print ("---------")
     Active,cm_a,φm_deg_a,ΔxM_a= active(99999999999,0)
+
+
+    pyscript.write('labelΚ_ΑΕ',round (Active,3))
+    pyscript.write('labelcm_a',round(cm_a,3 ) )   
+    pyscript.write('labelφm_deg_a',round(φm_deg_a,3 ))
+    pyscript.write('labelΔxM_a',round(ΔxM_a*1000,3 )) 
+    
     At_rest,cm_o,φm_deg_o = at_rest(1,0)
+
+    pyscript.write('labelAt_rest',round (At_rest,3))
+    pyscript.write('labelcm_o',round(cm_o,3 ) )    
+    pyscript.write('labelφm_deg_o',round(φm_deg_o,3 ))
+
+
     Passive,cm_p_s,φm_deg_p_s,ΔxM_p = passive(99999999999,0)
+
+    pyscript.write('labelPassive',round (Passive,3))
+    pyscript.write('labelcm_p_s',round(cm_p_s,3 ) )   
+    pyscript.write('labelφm_deg_p_s',round(φm_deg_p_s,3 ))
+    pyscript.write('labelΔxM_p',round(ΔxM_p*1000,3 )) 
+
     print ("INTERMEDIATE ACTIVE STATE:")
     print ("---------------------------")
     print ("Δx/Δx_max","  ", "φ_m [°]", " c_m [kPa]","", "K_IA", "    Δx[mm]")
