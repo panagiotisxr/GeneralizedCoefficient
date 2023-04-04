@@ -112,8 +112,8 @@
                         </tr>    
 
                         <tr>
-                            <td> Intermediate earth pressure (see black window below) </td>
-                            <td>   <button class="button" id="submit-button" type="submit" py-Click="run_interm()"> Run intermediate analysis for Δx</button>   </td>              
+                            <td> Intermediate earth pressures (see black window below) </td>
+                            <td>   <button class="button" id="submit-button" type="submit" py-Click="run_interm()"> Run intermediate analysis</button>   </td>              
                         </tr> 
 
   
@@ -121,10 +121,13 @@
                         <tr>
                             <td> Type Δx</td>
                             <td>   <input type="number" id="Δx_new" name="Δx_new"  min="0" placeholder="e.g. 5 mm" />   </td> 
-                            <td>mm</td>           
-                            <td>   <button  id="analysis_Δx_new" type="submit" py-Click="my_function2()"> Run for Δx </button>   </td>        
+                            <td>mm</td>             
                         </tr>  
 
+                        <tr>
+                            <td> Run intermediate analysis for Δx</td>         
+                            <td>   <button  id="analysis_Δx_new" type="submit" py-Click="my_function2()"> Run for Δx </button>   </td>        
+                        </tr>  
 
                         <tr>
                             <td> Refresh Page </td>
@@ -183,12 +186,14 @@
                         <tr>
                             <td>Κ<sub>ΟΕ</sub> </td>
                             <td>c<sub>m</sub> [kPa] </td>
-                            <td>φ<sub>m</sub> [°] </td>              
+                            <td>φ<sub>m</sub> [°] </td> 
+                            <td>σ'<sub>ΟE</sub> [kPa] </td>                
                         </tr>
                         <tr>
                             <td> <span id='labelAt_rest'> </span> </td>
                             <td> <span id='labelcm_o'> </span> </td>
-                            <td> <span id='labelφm_deg_o'> </span> </td>                          
+                            <td> <span id='labelφm_deg_o'> </span> </td>  
+                            <td> <span id='labelrest'> </span> </td>                        
                         </tr>  
                     </tbody>   
                 </table>
@@ -740,6 +745,7 @@ def results_python():
     pyscript.write('labelAt_rest',round (At_rest,3))
     pyscript.write('labelcm_o',round(cm_o,3 ) )    
     pyscript.write('labelφm_deg_o',round(φm_deg_o,3 ))
+    pyscript.write('labelrest',round(σv_prime*At_rest,3 )) 
 
     Passive,cm_p_s,φm_deg_p_s,ΔxM_p = passive(99999999999,0)
 
