@@ -62,11 +62,11 @@
                             <td>°</td>             
                         </tr>  
 
-                        <tr>
+                        <!-- <tr>
                             <td> Unit weight of soil [γ] </td>
                             <td>  <input type="number" id="γ" name="Unit_Weight" min="0"  placeholder="e.g. 20 kN/m3"/>  </td>        
                             <td>kN/m<sup>3</sup></td>        
-                        </tr>   
+                        </tr>    -->
 
                         <tr>
                             <td> Seismic coefficient of horizontal acceleration [α<sub>h</sub>] </td>
@@ -96,7 +96,15 @@
                             <td>   <input type="number" id="ν" name="Poissons_ratio"  min="0" maxlength="0.5" placeholder="e.g. 0.3"/>  </td>              
                         </tr>    
                 
-
+                        <tr>
+                            <td> Preselected values </td>
+                            <td>   <button class="button" type="button" onclick="stored_values()">Preselected values</button>   </td>              
+                        </tr> 
+        
+                        <tr>
+                            <td> Analysis </td>
+                            <td>   <button class="button" id="submit-button" type="submit" py-Click="results_python()"> Run Analysis</button>   </td>              
+                        </tr> 
 
                         <tr>
                             <td> Number of intermediate points (for the intermediate earth pressures)</td>
@@ -104,31 +112,25 @@
                         </tr>    
 
                         <tr>
-                            <td> Preselected values </td>
-                            <td>   <button type="button" onclick="stored_values()">Preselected values</button>   </td>              
-                        </tr> 
-        
-                        <tr>
-                            <td> Analysis </td>
-                            <td>   <button id="submit-button" type="submit" py-Click="results_python()"> Run Analysis</button>   </td>              
-                        </tr>   
-
-                        <tr>
                             <td> Intermediate earth pressure (see black window below) </td>
-                            <td>   <button id="submit-button" type="submit" py-Click="run_interm()"> Run Intermediate Analysis</button>   </td>              
+                            <td>   <button class="button" id="submit-button" type="submit" py-Click="run_interm()"> Run Intermediate Analysis</button>   </td>              
                         </tr> 
+
+  
+                        
+                        <tr>
+                            <td> Run intermediate analysis for Δx</td>
+                            <td>   <input type="number" id="Δx_new" name="Δx_new"  min="0" placeholder="e.g. 5 mm" />   </td> 
+                            <td>mm</td>           
+                            <td>   <button  id="analysis_Δx_new" type="submit" py-Click="my_function2()"> Run for Δx </button>   </td>        
+                        </tr>  
+
 
                         <tr>
                             <td> Refresh Page </td>
-                            <td>          <button onClick="history.go(0);">Refresh</button>  </td>              
-                        </tr>    
+                            <td> <button class="button" onClick="history.go(0);">Refresh</button>  </td>              
+                        </tr>                          
                         
-                        <tr>
-                            <td> Type Δx</td>
-                            <td>   <input type="number" id="Δx_new" name="Δx_new"  min="0" placeholder="e.g. 5 mm" />   </td> 
-                            <td>mm</td>           
-                            <td>   <button id="analysis_Δx_new" type="submit" py-Click="my_function2()"> Find </button>   </td>        
-                        </tr>    
                     </tbody>
                 </table>
                     <script>
@@ -138,7 +140,7 @@
                     document.getElementById("H").defaultValue = "4";         
                     document.getElementById("c").defaultValue = "20";         
                     document.getElementById("φ_d").defaultValue = "30";
-                    document.getElementById("γ").defaultValue = "20";
+                    // document.getElementById("γ").defaultValue = "20";
                     document.getElementById("ah").defaultValue = "0.3";
                     document.getElementById("av").defaultValue = "0.15";
                     document.getElementById("Es").defaultValue = "20000";
@@ -161,12 +163,15 @@
                             <td>c<sub>m</sub> [kPa] </td>
                             <td>φ<sub>m</sub> [°] </td>          
                             <td>Δx<sub>max Active</sub> [mm] </td>       
+                            <td>σ'<sub>ΑΕ</sub> [kPa] </td>    
+
                         </tr>
                         <tr>
                            <td> <span id='labelΚ_ΑΕ'> </span> </td>
                            <td> <span id='labelcm_a'> </span> </td>
                            <td> <span id='labelφm_deg_a'> </span> </td>
                            <td> <span id='labelΔxM_a'> </span> </td>
+                           <td> <span id='labelact'> </span> </td>
 
                         </tr>  
                     </tbody>   
@@ -183,8 +188,7 @@
                         <tr>
                             <td> <span id='labelAt_rest'> </span> </td>
                             <td> <span id='labelcm_o'> </span> </td>
-                            <td> <span id='labelφm_deg_o'> </span> </td>
-
+                            <td> <span id='labelφm_deg_o'> </span> </td>                          
                         </tr>  
                     </tbody>   
                 </table>
@@ -197,20 +201,22 @@
                             <td>c<sub>m</sub> [kPa]</td>
                             <td>φ<sub>m</sub> [°]</td>          
                             <td>Δx<sub>max Passive</sub> [mm]</td>   
+                            <td>σ'<sub>PΕ</sub> [kPa] </td>  
+
                         </tr>
                         <tr>
                             <td> <span id='labelPassive'> </span> </td>
                             <td> <span id='labelcm_p_s'> </span> </td>
                             <td> <span id='labelφm_deg_p_s'> </span> </td>
                             <td> <span id='labelΔxM_p'> </span> </td>
-
+                            <td> <span id='labelpas'> </span> </td>
                         </tr>  
                     </tbody>   
                 </table>
                 <hr>
                 
                 <table cellspacing="20">
-                    <h3> Intermediate state for the given Δx value </h3>
+                    <h3> Intermediate states (active and passive) for the given Δx value</h3>
                     <tbody>
                         <tr>
                             <td> <span id='label_text1a'> </span> </td>
@@ -261,7 +267,7 @@ def data():
     H= float (Element('H').element.value )
     c = float (Element('c').element.value )
     φ_d = float (Element('φ_d').element.value )
-    γ = float (Element('γ').element.value )         
+    #γ = float (Element('γ').element.value )         
     ah = float (Element('ah').element.value )  
     av = float (Element('av').element.value )
     Es = float (Element('Es').element.value )  
@@ -273,11 +279,11 @@ def data():
         Z=H
         print ("Error Z couldn't be greater than H")
 
-    return (σv_prime,H,c,φ_d,γ,ah,av,Es,ν,Z,Inte_p)
+    return (σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p)
 
 def fundamentals():
     
-    σv_prime,H,c,φ_d,γ,ah,av,Es,ν,Z,Inte_p = data()
+    σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p = data()
     ah_av = ah/(1-av)
     φ_r = radians(φ_d)
     #β_r = radians(β)
@@ -289,7 +295,7 @@ def fundamentals():
     return (ah_av,φ_r,Rankine_A,Rankine_P,Jaky,ζ)
 
 def at_rest(x,y):
-    σv_prime,H,c,φ_d,γ,ah,av,Es,ν,Z,Inte_p = data()
+    σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p = data()
     ah_av,φ_r,Rankine_A,Rankine_P,Jaky,ζ = fundamentals()
     z_a = Z 
     mA = x
@@ -328,7 +334,7 @@ def at_rest(x,y):
     return (At_rest,cm_o,φm_deg_o)
 
 def active(x,y):
-    σv_prime,H,c,φ_d,γ,ah,av,Es,ν,Z,Inte_p = data()
+    σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p = data()
     ah_av,φ_r,Rankine_A,Rankine_P,Jaky,ζ = fundamentals()
     z_a = Z 
     if   (z_a  &gt H/2):
@@ -372,7 +378,7 @@ def active(x,y):
     return (Active,cm_a,φm_deg_a,ΔxM_a)
 
 def passive(x,y):
-    σv_prime,H,c,φ_d,γ,ah,av,Es,ν,Z,Inte_p = data()
+    σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p = data()
     ah_av,φ_r,Rankine_A,Rankine_P,Jaky,ζ = fundamentals()
     At_rest,cm_o,φm_deg_o=at_rest(1,1)
     z_a = Z 
@@ -417,7 +423,7 @@ def passive(x,y):
 
 def int_passive(Δx_new):
     Passive,cm_p_s,φm_deg_p_s,ΔxM_p = passive(99999999999,1)    
-    σv_prime,H,c,φ_d,γ,ah,av,Es,ν,Z,Inte_p = data()
+    σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p = data()
     ah_av,φ_r,Rankine_A,Rankine_P,Jaky,ζ = fundamentals()
 
     Δx_int_pass= Δx_new
@@ -466,7 +472,7 @@ def int_passive(Δx_new):
 
 def int_active(Δx_new):
     Active,cm_a,φm_deg_a,ΔxM_a= active(99999999999,1)  
-    σv_prime,H,c,φ_d,γ,ah,av,Es,ν,Z,Inte_p = data()
+    σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p = data()
     ah_av,φ_r,Rankine_A,Rankine_P,Jaky,ζ = fundamentals()
 
 
@@ -530,7 +536,7 @@ def int_active(Δx_new):
     
 
 def run_interm(*args, **kwargs):
-    σv_prime,H,c,φ_d,γ,ah,av,Es,ν,Z,Inte_p = data()
+    σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p = data()
     ah_av,φ_r,Rankine_A,Rankine_P,Jaky,ζ = fundamentals()
 
     dx_dmax = []
@@ -720,12 +726,14 @@ def run_interm(*args, **kwargs):
     print ()
 
 def results_python():
+    σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p = data()
     Active,cm_a,φm_deg_a,ΔxM_a= active(99999999999,0)
 
     pyscript.write('labelΚ_ΑΕ',round (Active,3))
     pyscript.write('labelcm_a',round(cm_a,3 ) )   
     pyscript.write('labelφm_deg_a',round(φm_deg_a,3 ))
     pyscript.write('labelΔxM_a',round(ΔxM_a*1000,3 )) 
+    pyscript.write('labelact',round(σv_prime*Active,3 )) 
 
     At_rest,cm_o,φm_deg_o = at_rest(1,0)
 
@@ -739,7 +747,7 @@ def results_python():
     pyscript.write('labelcm_p_s',round(cm_p_s,3 ) )   
     pyscript.write('labelφm_deg_p_s',round(φm_deg_p_s,3 ))
     pyscript.write('labelΔxM_p',round(ΔxM_p*1000,3 ))
-
+    pyscript.write('labelpas',round(σv_prime*Passive,3 )) 
 
 </py-script>
 
