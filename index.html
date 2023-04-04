@@ -124,7 +124,7 @@
                         </tr>    
                         
                         <tr>
-                            <td> Type Δx in mm [0 - Δx_max]</td>
+                            <td> Type Δx</td>
                             <td>   <input type="number" id="Δx_new" name="Δx_new"  min="0" placeholder="e.g. 5 mm" />   </td> 
                             <td>mm</td>           
                             <td>   <button id="analysis_Δx_new" type="submit" py-Click="my_function2()"> Find </button>   </td>        
@@ -210,7 +210,7 @@
                 <hr>
                 
                 <table cellspacing="20">
-                    <h3> Δx_new </h3>
+                    <h3> Intermediate state for the given Δx value </h3>
                     <tbody>
                         <tr>
                             <td> <span id='label_text1a'> </span> </td>
@@ -805,22 +805,22 @@ def my_function2(*args, **kwargs):
         pyscript.write('label_text1a',"K_IA") 
         pyscript.write('label_text2a',"c_m [kPa]") 
         pyscript.write('label_text3a',"φ_m [°]") 
-        pyscript.write('label_text4a',"")
+        pyscript.write('label_text4a',"Δx_max Active")
 
         pyscript.write('label_value1a',round(Κ_ΧΕ_int_a,3))  
         pyscript.write('label_value2a',round(cm_int_a,3)) 
         pyscript.write('label_value3a',round(φm_deg_int_a,3)) 
-        pyscript.write('label_value4a',"")
+        pyscript.write('label_value4a',round(ΔxM_a*1000,3)) 
 
         pyscript.write('label_text1p',"K_IP") 
         pyscript.write('label_text2p',"c_m [kPa]") 
         pyscript.write('label_text3p',"φ_m [°]")    
-        pyscript.write('label_text4p',"") 
+        pyscript.write('label_text4p',"Δx_max Passive")
 
         pyscript.write('label_value1p',round(Κ_ΧΕ_p_2,3))   
         pyscript.write('label_value2p',round(cm_p,3))  
         pyscript.write('label_value3p',round(φm_deg_p,3))   
-        pyscript.write('label_value4p',"")    
+        pyscript.write('label_value4p',round(ΔxM_p*1000,3))   
     
     if  ΔxM_a &lt Δx_new &lt;= ΔxM_p:
 
@@ -837,12 +837,12 @@ def my_function2(*args, **kwargs):
         pyscript.write('label_text1p',"K_IP") 
         pyscript.write('label_text2p',"c_m [kPa]") 
         pyscript.write('label_text3p',"φ_m [°]")    
-        pyscript.write('label_text4p',"") 
+        pyscript.write('label_text4p',"Δx_max Passive") 
 
         pyscript.write('label_value1p',round(Κ_ΧΕ_p_2,3)) 
         pyscript.write('label_value2p',round(cm_p,3))
         pyscript.write('label_value3p',round(φm_deg_p,3)) 
-        pyscript.write('label_value4p',"") 
+        pyscript.write('label_value4p',round(ΔxM_p*1000,3))
 
 
 </py-script>
