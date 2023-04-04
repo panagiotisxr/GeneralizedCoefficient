@@ -228,6 +228,7 @@
                             <td> <span id='label_text2a'> </span> </td>
                             <td> <span id='label_text3a'> </span> </td>
                             <td> <span id='label_text4a'> </span> </td>
+                            <td> <span id='label_text5a'> </span> </td>
 
                         </tr>
                         <tr>
@@ -235,6 +236,7 @@
                             <td> <span id='label_value2a'> </span> </td>
                             <td> <span id='label_value3a'> </span> </td>
                             <td> <span id='label_value4a'> </span> </td>
+                            <td> <span id='label_value5a'> </span> </td>
 
                         </tr>  
                     </tbody>   
@@ -244,13 +246,14 @@
                             <td> <span id='label_text2p'> </span> </td>
                             <td> <span id='label_text3p'> </span> </td>
                             <td> <span id='label_text4p'> </span> </td>
-
+                            <td> <span id='label_text5p'> </span> </td>
                         </tr>
                         <tr>
                             <td> <span id='label_value1p'> </span> </td>
                             <td> <span id='label_value2p'> </span> </td>
                             <td> <span id='label_value3p'> </span> </td>
                             <td> <span id='label_value4p'> </span> </td>
+                            <td> <span id='label_value5p'> </span> </td>
 
                         </tr>  
                     </tbody>   
@@ -760,6 +763,7 @@ def results_python():
 <py-script>  
 def my_function2(*args, **kwargs): 
 
+    σv_prime,H,c,φ_d,ah,av,Es,ν,Z,Inte_p = data()
     Δx_new = float (Element('Δx_new').element.value )   
     Δx_new=Δx_new/1000
  
@@ -774,22 +778,26 @@ def my_function2(*args, **kwargs):
         pyscript.write('label_text1a',"K_OE") 
         pyscript.write('label_text2a',"c_m [kPa]") 
         pyscript.write('label_text3a',"φ_m [°]") 
-        pyscript.write('label_text4a',"")
+        pyscript.write('label_text4a',"σ'_ΟE [kPa]")      
+        pyscript.write('label_text5a',"")
 
         pyscript.write('label_value1a',round(At_rest,3 ))   
         pyscript.write('label_value2a',round(cm_o,3 )) 
         pyscript.write('label_value3a',round(φm_deg_o,3 )) 
-        pyscript.write('label_value4a',"")
+        pyscript.write('label_value4a',round(σv_prime*At_rest,3 ))      
+        pyscript.write('label_value5a',"")
 
         pyscript.write('label_text1p',"") 
         pyscript.write('label_text2p',"") 
         pyscript.write('label_text3p',"")    
         pyscript.write('label_text4p',"") 
+        pyscript.write('label_text5p',"") 
 
         pyscript.write('label_value1p',"")   
         pyscript.write('label_value2p',"")  
         pyscript.write('label_value3p',"")
-        pyscript.write('label_value4p',"")   
+        pyscript.write('label_value4p',"")     
+        pyscript.write('label_value5p',"")   
 
     if Δx_new &gt ΔxM_p:
 
@@ -797,22 +805,25 @@ def my_function2(*args, **kwargs):
         pyscript.write('label_text2a',"c_m [kPa]") 
         pyscript.write('label_text3a',"φ_m [°]") 
         pyscript.write('label_text4a',"Δx_max Active")
+        pyscript.write('label_text5a',"σ'_AE [kPa]")    
 
         pyscript.write('label_value1a',round(Active,3 ))    
         pyscript.write('label_value2a',round(cm_a,3))
         pyscript.write('label_value3a',round(φm_deg_a,3))
         pyscript.write('label_value4a',round(ΔxM_a*1000,3))
+        pyscript.write('label_value5a',round(σv_prime*Active,3 )) 
 
         pyscript.write('label_text1p',"Κ_ΡΕ") 
         pyscript.write('label_text2p',"c_m [kPa]") 
         pyscript.write('label_text3p',"φ_m [°]")    
         pyscript.write('label_text4p',"Δx_max Passive") 
+        pyscript.write('label_text5p',"σ'_PE [kPa]") 
 
         pyscript.write('label_value1p',round(Passive,3))  
         pyscript.write('label_value2p',round(cm_p_s,3))   
         pyscript.write('label_value3p',round(φm_deg_p_s,3)) 
         pyscript.write('label_value4p',round(ΔxM_p*1000,3))    
-
+        pyscript.write('label_value5p',round(σv_prime*Passive,3 )) 
 
     if 0 &lt Δx_new &lt;= ΔxM_a:  
 
@@ -820,44 +831,51 @@ def my_function2(*args, **kwargs):
         pyscript.write('label_text2a',"c_m [kPa]") 
         pyscript.write('label_text3a',"φ_m [°]") 
         pyscript.write('label_text4a',"Δx_max Active")
+        pyscript.write('label_text5a',"σ'_IA [kPa]") 
 
         pyscript.write('label_value1a',round(Κ_ΧΕ_int_a,3))  
         pyscript.write('label_value2a',round(cm_int_a,3)) 
         pyscript.write('label_value3a',round(φm_deg_int_a,3)) 
         pyscript.write('label_value4a',round(ΔxM_a*1000,3)) 
+        pyscript.write('label_value5a',round(σv_prime*Κ_ΧΕ_int_a,3 ))
 
         pyscript.write('label_text1p',"K_IP") 
         pyscript.write('label_text2p',"c_m [kPa]") 
         pyscript.write('label_text3p',"φ_m [°]")    
         pyscript.write('label_text4p',"Δx_max Passive")
+        pyscript.write('label_text5p',"σ'_IP [kPa]") 
 
         pyscript.write('label_value1p',round(Κ_ΧΕ_p_2,3))   
         pyscript.write('label_value2p',round(cm_p,3))  
         pyscript.write('label_value3p',round(φm_deg_p,3))   
         pyscript.write('label_value4p',round(ΔxM_p*1000,3))   
-    
+        pyscript.write('label_value5p',round(σv_prime*Κ_ΧΕ_p_2,3 )) 
+
     if  ΔxM_a &lt Δx_new &lt;= ΔxM_p:
 
         pyscript.write('label_text1a',"K_AE") 
         pyscript.write('label_text2a',"c_m [kPa]") 
         pyscript.write('label_text3a',"φ_m [°]") 
         pyscript.write('label_text4a',"Δx_max Active")
+        pyscript.write('label_text5a',"σ'_AE [kPa]")
 
         pyscript.write('label_value1a',round(Active,3)) 
         pyscript.write('label_value2a',round(cm_a,3)) 
         pyscript.write('label_value3a',round(φm_deg_a,3)) 
         pyscript.write('label_value4a',round(ΔxM_a*1000,3)) 
+        pyscript.write('label_value5a',round(σv_prime*Active,3 ))
 
         pyscript.write('label_text1p',"K_IP") 
         pyscript.write('label_text2p',"c_m [kPa]") 
         pyscript.write('label_text3p',"φ_m [°]")    
         pyscript.write('label_text4p',"Δx_max Passive") 
+        pyscript.write('label_text5p',"σ'_IP [kPa]") 
 
         pyscript.write('label_value1p',round(Κ_ΧΕ_p_2,3)) 
         pyscript.write('label_value2p',round(cm_p,3))
         pyscript.write('label_value3p',round(φm_deg_p,3)) 
         pyscript.write('label_value4p',round(ΔxM_p*1000,3))
-
+        pyscript.write('label_value5p',round(σv_prime*Κ_ΧΕ_p_2,3 ))
 
 </py-script>
 
