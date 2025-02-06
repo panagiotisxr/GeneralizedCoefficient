@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Generalized Coefficient of Earth Pressure</title>
+
+    <link rel="icon" href="favicon.ico" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+  </head>
+  <body>
+    <div class="cut">
+      <img src="cut.jpg" alt="Cut Diagram" />
+    </div>
+    <h1>The Generalized Coefficient of Earth Pressure</h1>
+    <h2 id="myHeader2">Online Calculator</h2>
+    <p>
+      By Drs <strong>
+        <a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=u5fbtlcAAAAJ&hl=en">Lysandros Pantelidis</a>
+      </strong>
+      and <strong>
+        <a target="_blank" rel="noopener" href="https://scholar.google.com/citations?user=R8zAApkAAAAJ&hl=en">Panagiotis Christodoulou</a>
+      </strong>
+    </p>
+    <p>
+      Cite as: <strong>
+        <a target="_blank" rel="noopener" href="applsci-09-05291-v3.pdf">Pantelidis, L. (2019). The generalized coefficients of earth pressure: a unified approach. Applied Sciences, 9(24), 5291Ζ.</a>
+      </strong>
+    </p>
+    <p>
+      <strong>
+        <a target="_blank" rel="noopener" href="related_publications.html">Related Publications</a>
+      </strong>
+    </p>
+
+   <div class="container">
+  <div class="data-section">
+    <h2>Data</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td class="left-align">Preselected values</td>
+          <td>
+            <button class="button" type="button" onclick="stored_values()">Preselected values</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-align">Total height of the retained soil on the active or the passive side [H]</td>
+          <td>
+            <input type="number" id="H" name="Height" min="0" placeholder="e.g. 4 m" step="0.1" />
+          </td>
+          <td>m</td>
+        </tr>
+        <tr>
+          <td class="left-align">Depth where the earth pressure is calculated [z; 0 &lt; z &lt; H]</td>
+          <td>
+            <input type="number" id="Z" name="Depth" min="0" placeholder="e.g. 2 m" step="0.1" />
+          </td>
+          <td>m</td>
+        </tr>
+        <tr>
+          <td class="left-align">Effective stress at depth z [σ'v; avoid the zero value]</td>
+          <td>
+            <input type="number" id="σv_prime" name="total_stress" min="0" placeholder="e.g. 40 kPa" step="5" />
+          </td>
+          <td>kPa</td>
+        </tr>
+        <tr>
+          <td class="left-align">Effective cohesion [c'; avoid the zero value]</td>
+          <td>
+            <input type="number" id="c" name="Cohesion" min="0" placeholder="e.g. 20 kPa" step="5" />
+          </td>
+          <td>kPa</td>
+        </tr>
+        <tr>
+          <td class="left-align">Effective friction angle [φ'; avoid the zero value]</td>
+          <td>
+            <input type="number" id="φ_d" name="Friction_angle" min="0" placeholder="e.g. 30 °" step="5" />
+          </td>
+          <td>°</td>
+        </tr>
+        <tr>
+          <td class="left-align">Seismic coefficient of horizontal acceleration [α<sub>h</sub>]</td>
+          <td>
+            <input type="number" id="ah" name="Horizontal accel" placeholder="e.g. 0.3" step="0.05" />
+          </td>
+        </tr>
+        <tr>
+          <td class="left-align">Seismic coefficient of vertical acceleration [α<sub>v</sub>]</td>
+          <td>
+            <input type="number" id="av" name="vertical_acceleration" placeholder="e.g. 0.15" step="0.05" />
+          </td>
+        </tr>
+        <tr>
+          <td class="left-align">Μodulus of elasticity of soil [E]</td>
+          <td>
+            <input type="number" id="Es" name="Modulus_of_elasticity" min="0" placeholder="e.g. 20000 kPa" step="1000" />
+          </td>
+          <td>kPa</td>
+        </tr>
+        <tr>
+          <td class="left-align">Poisson’s ratio of soil [ν]</td>
+          <td>
+            <input type="number" id="ν" name="Poissons_ratio" min="0" max="0.5" placeholder="e.g. 0.3" step="0.05" />
+          </td>
+        </tr>
+        <tr>
+          <td class="left-align">Analysis</td>
+          <td>
+            <button class="button" id="submit-button" py-click="results_python">Run</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-align">Number of intermediate points (for the intermediate earth pressures)</td>
+          <td>
+            <input type="number" id="Inte_p" name="Intermediate_points" min="0" placeholder="e.g. 15" />
+          </td>
+        </tr>
+        <tr>
+          <td class="left-align">Intermediate earth pressures</td>
+          <td>
+            <button class="button" id="interm-button" py-click="run_interm">Run</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-align">Type Δx</td>
+          <td>
+            <input type="number" id="Δx_new" name="Δx_new" min="0" placeholder="e.g. 5 mm" />
+          </td>
+          <td>mm</td>
+        </tr>
+        <tr>
+          <td class="left-align">Run analysis for Δx</td>
+          <td>
+            <button class="button" id="analysis_Δx_new" py-click="my_function2">Run</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-align">Refresh Page</td>
+          <td>
+            <button class="button" onClick="history.go(0);">Refresh</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      function stored_values() {
+        document.getElementById("σv_prime").value = "40";
+        document.getElementById("H").value = "4";
+        document.getElementById("c").value = "20";
+        document.getElementById("φ_d").value = "30";
+        document.getElementById("ah").value = "0.3";
+        document.getElementById("av").value = "0.15";
+        document.getElementById("Es").value = "20000";
+        document.getElementById("ν").value = "0.3";
+        document.getElementById("Z").value = "2";
+        document.getElementById("Inte_p").value = "15";
+        document.getElementById("Δx_new").value = "5";
+      }
+    </script>
+  </div>
+</div>
+
+
+    <div class="results-section">
+      <h2> Results </h2>
+
+      <!-- Active State Results -->
+      <h3> Active State (if H refers to the active side of the problem)</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Κ<sub>ΑΕ</sub> </td>
+            <td>c<sub>m</sub> [kPa] </td>
+            <td>φ<sub>m</sub> [°] </td>
+            <td>Δx<sub>max Active</sub> [mm] </td>
+            <td>σ'<sub>ΑΕ</sub> [kPa] </td>
+          </tr>
+          <tr>
+            <td><span id="label_K_AE"></span></td>
+            <td><span id="label_cm_a"></span></td>
+            <td><span id="label_phi_m_deg_a"></span></td>
+            <td><span id="label_DxM_a"></span></td>
+            <td><span id="label_act"></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+
+      <!-- At Rest State Results -->
+      <h3> At Rest </h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Κ<sub>ΟΕ</sub> </td>
+            <td>c<sub>m</sub> [kPa] </td>
+            <td>φ<sub>m</sub> [°] </td>
+            <td>σ'<sub>ΟΕ</sub> [kPa] </td>
+          </tr>
+          <tr>
+            <td><span id="label_At_rest"></span></td>
+            <td><span id="label_cm_o"></span></td>
+            <td><span id="label_phi_m_deg_o"></span></td>
+            <td><span id="label_rest"></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+
+      <!-- Passive State Results -->
+      <h3> Passive State (if H refers to the passive side of the problem) </h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Κ<sub>PE</sub> </td>
+            <td>c<sub>m</sub> [kPa]</td>
+            <td>φ<sub>m</sub> [°]</td>
+            <td>Δx<sub>max Passive</sub> [mm]</td>
+            <td>σ'<sub>PΕ</sub> [kPa] </td>
+          </tr>
+          <tr>
+            <td><span id="label_Passive"></span></td>
+            <td><span id="label_cm_p_s"></span></td>
+            <td><span id="label_phi_m_deg_p_s"></span></td>
+            <td><span id="label_DxM_p"></span></td>
+            <td><span id="label_pas"></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+
+      <!-- Intermediate States Results -->
+      <h3> Intermediate states (active and passive) for the given Δx value</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td><span id="label_text1a"></span></td>
+            <td><span id="label_text2a"></span></td>
+            <td><span id="label_text3a"></span></td>
+            <td><span id="label_text4a"></span></td>
+            <td><span id="label_text5a"></span></td>
+          </tr>
+          <tr>
+            <td><span id="label_value1a"></span></td>
+            <td><span id="label_value2a"></span></td>
+            <td><span id="label_value3a"></span></td>
+            <td><span id="label_value4a"></span></td>
+            <td><span id="label_value5a"></span></td>
+          </tr>
+          <tr>
+            <td><span id="label_text1p"></span></td>
+            <td><span id="label_text2p"></span></td>
+            <td><span id="label_text3p"></span></td>
+            <td><span id="label_text4p"></span></td>
+            <td><span id="label_text5p"></span></td>
+          </tr>
+          <tr>
+            <td><span id="label_value1p"></span></td>
+            <td><span id="label_value2p"></span></td>
+            <td><span id="label_value3p"></span></td>
+            <td><span id="label_value4p"></span></td>
+            <td><span id="label_value5p"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="intermediate-results" style="margin-top:20px;"></div>
+    <script type="py" src="main.py"></script>
+    
+  </body>
+</html>
